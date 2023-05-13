@@ -1,31 +1,27 @@
 package com.vdi.algorithms.sort;
 
-public class BubbleSort<T extends Comparable<T>> extends Sort<T> {
-    public BubbleSort(T[] array) {
-        super(array);
-    }
+public class BubbleSort<T extends Comparable<T>> implements Sort<T> {
+
 
     @Override
-    public T[] sort() {
+    public void sort(T[] unsortedArray) {
         T current;
         T next;
         boolean hasSwap;
-        for (int i = 1; i < array.length; i++) {
+        for (int i = 1; i < unsortedArray.length; i++) {
             hasSwap = false;
-            for (int j = 0; j < array.length - i; j++) {
-                current = array[j];
-                next = array[j + 1];
+            for (int j = 0; j < unsortedArray.length - i; j++) {
+                current = unsortedArray[j];
+                next = unsortedArray[j + 1];
 
                 if (current.compareTo(next) > 0) {
-                    array[j] = next;
-                    array[j+1] = current;
+                    unsortedArray[j] = next;
+                    unsortedArray[j + 1] = current;
                     hasSwap = true;
                 }
             }
             if (!hasSwap)
-                return array;
+                return;
         }
-
-        return array;
     }
 }

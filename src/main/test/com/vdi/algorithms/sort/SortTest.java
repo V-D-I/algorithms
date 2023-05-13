@@ -14,42 +14,40 @@ import java.util.Random;
 class SortTest {
 
     static Integer[] sortedIntegersArray = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    static Integer[] unsortedIntegersArray = sortedIntegersArray.clone();
     static List<Sort<Integer>> integerSortAlgorithms = new ArrayList<>();
 
     @BeforeAll
     static void init() {
-        shuffle(unsortedIntegersArray);
-        Sort<Integer> bubbleSort = new BubbleSort<>(unsortedIntegersArray);
+        Sort<Integer> bubbleSort = new BubbleSort<>();
+        Sort<Integer> insertionSort = new InsertionSort<>();
 
         integerSortAlgorithms.add(bubbleSort);
+        integerSortAlgorithms.add(insertionSort);
     }
 
-
-//    @BeforeEach
-//    void reshuffleArrays() {
-//        shuffle(integersArray);
-//    }
-
-    static <T extends Comparable<T>> void shuffle(T[] array) {
+    static <T extends Comparable<T>> T[] shuffle(T[] array) {
         Random random = new Random();
+        T[] unsortedArray = array.clone();
         int min = 0;
-        int max = array.length - 1;
-        for (int i = 0; i < array.length; i++) {
+        int max = unsortedArray.length - 1;
+        for (int i = 0; i < unsortedArray.length; i++) {
             int randomIndex = random.nextInt(max - min + 1) + min;
             int randomPosition = random.nextInt(max - min + 1) + min;
 
-            T temp = array[randomIndex];
-            array[randomIndex] = array[randomPosition];
-            array[randomPosition] = temp;
+            T temp = unsortedArray[randomIndex];
+            unsortedArray[randomIndex] = unsortedArray[randomPosition];
+            unsortedArray[randomPosition] = temp;
         }
+
+        return unsortedArray;
     }
 
     @Test
     void sort() {
         for (Sort<Integer> sortAlgorithm : integerSortAlgorithms) {
-            Integer[] sortedArray = sortAlgorithm.sort();
-            Assertions.assertArrayEquals(sortedIntegersArray, sortedArray);
+            Integer[] unsortedArray = shuffle(sortedIntegersArray);
+            sortAlgorithm.sort(unsortedArray);
+            Assertions.assertArrayEquals(sortedIntegersArray, unsortedArray);
         }
     }
 }
