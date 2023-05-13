@@ -8,7 +8,7 @@ public class LinearSearch<T> extends Search<T> {
 
     @Override
     public int search(T element) {
-        int indexOfFoundedElement = 0;
+        int indexOfFoundedElement = -1;
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(element)) {
                 indexOfFoundedElement = i;
