@@ -22,11 +22,13 @@ class SortTest {
         Sort<Integer> insertionSort = new InsertionSort<>();
         Sort<Integer> quickSort = new QuickSort<>();
         Sort<Integer> selectionSort = new SelectionSort<>();
+        Sort<Integer> mergeSort = new MergeSort<>();
 
         integerSortAlgorithms.add(bubbleSort);
         integerSortAlgorithms.add(insertionSort);
         integerSortAlgorithms.add(quickSort);
         integerSortAlgorithms.add(selectionSort);
+        integerSortAlgorithms.add(mergeSort);
     }
 
     static <T extends Comparable<T>> T[] shuffle(T[] array) {
