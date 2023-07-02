@@ -7,17 +7,23 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
 class SortTest {
 
-    static Integer[] sortedIntegersArray = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    static Integer[] sortedIntegersArray;
     static List<Sort<Integer>> integerSortAlgorithms = new ArrayList<>();
 
     @BeforeAll
     static void init() {
+        initSortingAlgorithms();
+        initArrayForTesting();
+    }
+
+    static void initSortingAlgorithms() {
         Sort<Integer> bubbleSort = new BubbleSort<>();
         Sort<Integer> insertionSort = new InsertionSort<>();
         Sort<Integer> quickSort = new QuickSort<>();
@@ -29,6 +35,15 @@ class SortTest {
         integerSortAlgorithms.add(quickSort);
         integerSortAlgorithms.add(selectionSort);
         integerSortAlgorithms.add(mergeSort);
+    }
+
+    static void initArrayForTesting() {
+        Random random = new Random();
+        sortedIntegersArray = new Integer[random.nextInt(100)];
+        for (int i = 0; i < sortedIntegersArray.length; i++) {
+            sortedIntegersArray[i] = random.nextInt(1000);
+        }
+        Arrays.sort(sortedIntegersArray);
     }
 
     static <T extends Comparable<T>> T[] shuffle(T[] array) {
